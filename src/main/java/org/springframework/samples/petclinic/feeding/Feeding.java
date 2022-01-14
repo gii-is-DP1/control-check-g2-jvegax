@@ -13,6 +13,8 @@ import lombok.Setter;
 
 @Getter
 @Setter
+@Entity
+@Table(name = "feedings")
 public class Feeding {
 
     @Id
@@ -25,11 +27,14 @@ public class Feeding {
     @Column(name = "start_date")
     LocalDate startDate;
 
-    @NotNull
-    @PositiveOrZero
+    @Positive
+    @Min(value = 1)
     @Column(name = "weeks_duration")
     double weeksDuration;
     
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL, optional = false)
     Pet pet;   
+
+    @ManyToOne(cascade = CascadeType.ALL, optional = false)
+    FeedingType feedingType;
 }
