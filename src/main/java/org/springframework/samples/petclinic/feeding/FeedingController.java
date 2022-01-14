@@ -33,7 +33,7 @@ public class FeedingController {
 
     @PostMapping(path = "/feeding/create")
     public String processCreationForm(@Valid Feeding feeding, BindingResult result, ModelMap modelMap) throws UnfeasibleFeedingException{
-        String view = "welcome";
+        
         if(result.hasErrors()){
             modelMap.addAttribute("feeding", feeding);
             modelMap.addAttribute("feedingType", feedingService.getAllFeedingTypes());
@@ -42,6 +42,6 @@ public class FeedingController {
             feedingService.save(feeding);
             modelMap.addAttribute("message", "feeding succesfully saved!");
         }
-        return view;
+        return "redirect:/welcome";
     }
 }
